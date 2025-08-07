@@ -1,0 +1,7 @@
+name: weather_time_agent
+runtime: python3.12
+entrypoint: main:app
+region: us-central1
+environment:
+  GOOGLE_GENAI_USE_VERTEXAI: "FALSE"
+  GOOGLE_API_KEY: "AIzaSyBN1q5M4n_fYqmEYs8iat3i_j_dluNllTg"
