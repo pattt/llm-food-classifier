@@ -80,3 +80,27 @@ python3 main.py
 ```aiignore
 curl -X POST http://localhost:8080/custom_webhook  -H "Content-Type: application/json" -d '{"message": "Hello from PubSub!"}' 
 ```
+
+Docker:
+```aiignore
+docker build . -t llm_weather
+docker run -p 8080:8080 llm_weather 
+```
+
+
+
+export GOOGLE_CLOUD_PROJECT=llm-food-classifier-project
+export GOOGLE_CLOUD_LOCATION=us-central1
+export GOOGLE_GENAI_USE_VERTEXAI=True
+export SERVICE_NAME="test-agent-service1"
+
+[Deploy to Cloud Run:](https://google.github.io/adk-docs/deploy/cloud-run)
+```aiignore
+gcloud run deploy llm-weather-service \
+--source . \
+--region $GOOGLE_CLOUD_LOCATION \
+--project $GOOGLE_CLOUD_PROJECT \
+--allow-unauthenticated \
+--set-env-vars="GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT,GOOGLE_CLOUD_LOCATION=$GOOGLE_CLOUD_LOCATION,GOOGLE_GENAI_USE_VERTEXAI=$GOOGLE_GENAI_USE_VERTEXAI"
+# Add any other necessary environment variables your agent might need
+```

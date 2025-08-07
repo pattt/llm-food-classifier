@@ -3,6 +3,9 @@ from weather_time_agent.agent import root_agent
 from google.adk.sessions import InMemorySessionService
 from google.adk import Runner
 from google.genai import types
+from dotenv import load_dotenv
+
+load_dotenv()
 
 #agent = Agent(name="manual-agent")
 app = FastAPI()
@@ -59,4 +62,4 @@ def call_agent(query, session_id, user_id):
 # Локальный запуск
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="127.0.0.1", port=8080, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)
