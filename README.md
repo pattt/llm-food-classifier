@@ -96,11 +96,10 @@ export SERVICE_NAME="test-agent-service1"
 
 [Deploy to Cloud Run:](https://google.github.io/adk-docs/deploy/cloud-run)
 ```aiignore
-gcloud run deploy llm-weather-service \
---source . \
+gcloud run deploy llm-weather-service --source . \                                                                                                                         (main)
 --region $GOOGLE_CLOUD_LOCATION \
 --project $GOOGLE_CLOUD_PROJECT \
 --allow-unauthenticated \
---set-env-vars="GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT,GOOGLE_CLOUD_LOCATION=$GOOGLE_CLOUD_LOCATION,GOOGLE_GENAI_USE_VERTEXAI=$GOOGLE_GENAI_USE_VERTEXAI"
-# Add any other necessary environment variables your agent might need
+--set-env-vars="GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT,GOOGLE_CLOUD_LOCATION=$GOOGLE_CLOUD_LOCATION,GOOGLE_GENAI_USE_VERTEXAI=$GOOGLE_GENAI_USE_VERTEXAI" \
+--memory=1Gi
 ```
