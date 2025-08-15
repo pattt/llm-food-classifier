@@ -96,7 +96,7 @@ export SERVICE_NAME="test-agent-service1"
 
 [Deploy to Cloud Run:](https://google.github.io/adk-docs/deploy/cloud-run)
 ```aiignore
-gcloud run deploy llm-weather-service --source . \                                                                                                                         (main)
+gcloud run deploy llm-weather-service --source . \
 --region $GOOGLE_CLOUD_LOCATION \
 --project $GOOGLE_CLOUD_PROJECT \
 --allow-unauthenticated \

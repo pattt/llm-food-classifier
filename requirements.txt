@@ -3,3 +3,6 @@ uvicorn
 google-adk
 google-genai
 python-dotenv
+
+google-cloud-pubsub
+google-auth

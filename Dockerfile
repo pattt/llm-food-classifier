@@ -14,4 +14,5 @@ USER myuser
 ENV PATH="/home/myuser/.local/bin:$PATH"
 
 #CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port $PORT"]
-CMD ["sh", "-c", "python3 main.py"]
+CMD ["sh", "-c", "python3 -u main.py"]
+#CMD ["sh", "-c", "python3 pubsub_subscriber.py"]
