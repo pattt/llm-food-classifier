@@ -5,6 +5,7 @@ from google.adk import Runner
 from google.genai import types
 from dotenv import load_dotenv
 import base64
+import json
 
 from google.cloud import pubsub_v1
 
@@ -36,7 +37,13 @@ async def custom_webhook(request: Request):
     body = await request.json()
     print("📥 Request body:", body)
 
-    message = base64.b64decode(body["message"]["data"])
+    data = base64.b64decode(body["message"]["data"])
+    print("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm " + str(data))
+    message = json.loads(data)["msg"]
+    chat_id = json.loads(data)["chat_id"]
+
+    print("mmmmm11" + json.loads(data)["msg"])
+    print("mmmmm22" + str(json.loads(data)["chat_id"]))
 
     session = sessions.get("user_id")
 
@@ -48,9 +55,11 @@ async def custom_webhook(request: Request):
 
     print("📥 session.id:", session.id)
 
+    print("message message message " + message)
+
     response = call_agent(message, session.id, "user_id")
 
-    publish_response(response)
+    publish_response(response, chat_id)
 
     print("📤 ADK response:", response)
     return response
@@ -66,12 +75,12 @@ def call_agent(query, session_id, user_id):
             print("Agent Response: ", final_response)
             return final_response
 
-def publish_response(response):
+def publish_response(response, chat_id):
     project_id = "llm-food-classifier-project"
     topic_id = "llm-weather-service-quene-resp"
     publisher = pubsub_v1.PublisherClient()
     topic_path = publisher.topic_path(project_id, topic_id)
-    data_str = response
+    data_str = json.dumps({"msg": response, "chat_id": chat_id})
     data = data_str.encode("utf-8")
     future = publisher.publish(topic_path, data)
     print(future.result())
